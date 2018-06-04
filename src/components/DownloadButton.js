@@ -13,9 +13,9 @@ export const downloadCSV = (csvName, data) => {
     dlink.onclick = () => {
       // revokeObjectURL needs a delay to work properly
       const revokeFn = () => {
-        window.URL.revokeObjectURL(this.href)
+        window.URL.revokeObjectURL(dlink.href)
       }
-      setTimeout(revokeFn.bind(this), 1500)
+      setTimeout(revokeFn, 1500)
     }
 
     dlink.click()
@@ -31,7 +31,7 @@ class DownloadButton extends React.Component {
       <div className="download-div" style={{ width }}>
         <button
           alt="download"
-          onClick={downloadCSV.bind(this, csvName, data)}
+          onClick={downloadCSV.bind(null, csvName, data)}
           className="download-data-button"
         >
           <a>{label}</a>
