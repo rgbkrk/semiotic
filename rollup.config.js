@@ -5,7 +5,7 @@ import builtins from "rollup-plugin-node-builtins"
 import replace from "rollup-plugin-replace"
 import regenerator from "rollup-plugin-regenerator"
 
-import flow from 'rollup-plugin-flow';
+import flow from "rollup-plugin-flow"
 
 export default {
   exports: "named",
@@ -17,7 +17,7 @@ export default {
   },
   interop: false,
   globals: {
-    "react": "React",
+    react: "React",
     "react-dom": "ReactDOM"
   },
   external: ["react", "react-dom"],
@@ -44,8 +44,26 @@ export default {
     babel({
       babelrc: false,
       runtimeHelpers: true,
-      presets: ["flow", ["es2015", { modules: false }], "react", "stage-0"],
-      plugins: ["external-helpers"]
+      presets: [
+        [
+          "env",
+          {
+            targets: {
+              chrome: 52
+            },
+            modules: false,
+            loose: true
+          }
+        ],
+        "react"
+      ],
+      plugins: [
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "transform-decorators-legacy",
+        "add-module-exports",
+        "react-require"
+      ]
     })
   ]
 }
